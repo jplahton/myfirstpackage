@@ -17,6 +17,7 @@ This function reads data from files specified by the given years and counts
 the number of accidents with fatal injuries by year and month.
 }
 \examples{
-fars_summarize_years(2019)
-fars_summarize_years(c(2019, 2020))
+fars_summarize_years(2013)
+fars_summarize_years(c(2013, 2014, 2015))
+
 }

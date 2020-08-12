@@ -13,9 +13,12 @@ make_filename(year)
 This function returns a character vector of a form "accident_YEAR.csv.bz2"
 }
 \description{
-This function makes a name for a file refering to a given year.
-That year is given as a parameter to he function.
+This function makes a name for a file referring to accidents during a given year.
+The year is given as a parameter to he function.
 }
 \examples{
-make_filename(2020)
+make_filename(2013)
+make_filename(2014)
+make_filename(2015)
+
 }

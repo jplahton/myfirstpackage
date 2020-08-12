@@ -11,9 +11,10 @@
 #' @return This function returns the data as a tibble object
 #'
 #' @examples
-#' fars_read("datafile.csv")
-
+#' fars_read("accident_2013.csv.bz2")
+#' @export
 fars_read <- function(filename) {
+        filename <- system.file("extdata", filename, package = "myfirstpackage")
         if(!file.exists(filename))
                 stop("file '", filename, "' does not exist")
         data <- suppressMessages({
@@ -32,8 +33,11 @@ fars_read <- function(filename) {
 #' @return This function returns a character vector of a form "accident_YEAR.csv.bz2"
 #'
 #' @examples
-#' make_filename(2020)
-
+#' make_filename(2013)
+#' make_filename(2014)
+#' make_filename(2015)
+#'
+#' @export
 make_filename <- function(year) {
         year <- as.integer(year)
         sprintf("accident_%d.csv.bz2", year)
@@ -47,14 +51,16 @@ make_filename <- function(year) {
 #'
 #' @importFrom dplyr mutate
 #' @importFrom dplyr select
+#' @import magrittr
 #'
 #' @param years A vector of years
 #'
 #' @return This function returns the data as a tibble object containing columns MONTH and year
 #'
 #' @examples
-#' fars_read_years(c(2019, 2020))
-
+#' fars_read_years(c(2013, 2014, 2015))
+#'
+#' @export
 fars_read_years <- function(years) {
         lapply(years, function(year) {
                 file <- make_filename(year)
@@ -78,20 +84,22 @@ fars_read_years <- function(years) {
 #' @importFrom dplyr group_by
 #' @importFrom dplyr summarize
 #' @importFrom tidyr spread
+#' @import magrittr
 #'
 #' @param years A vector of years
 #'
 #' @return This function returns a tibble object which gives the summary by year and month
 #'
 #' @examples
-#' fars_summarize_years(2019)
-#' fars_summarize_years(c(2019, 2020))
-
+#' fars_summarize_years(2013)
+#' fars_summarize_years(c(2013, 2014, 2015))
+#'
+#' @export
 fars_summarize_years <- function(years) {
         dat_list <- fars_read_years(years)
         dplyr::bind_rows(dat_list) %>%
                 dplyr::group_by(year, MONTH) %>%
-                dplyr::summarize(n = n()) %>%
+                dplyr::summarize(n = dplyr::n()) %>%
                 tidyr::spread(year, n)
 }
 
@@ -113,8 +121,9 @@ fars_summarize_years <- function(years) {
 #' @return This function plots the data
 #'
 #' @examples
-#' fars_map_state(1, 2020)
-
+#' fars_map_state(1, 2013)
+#'
+#' @export
 fars_map_state <- function(state.num, year) {
         filename <- make_filename(year)
         data <- fars_read(filename)

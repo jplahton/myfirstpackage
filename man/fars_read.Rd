@@ -17,5 +17,5 @@ This function reads a csv-formatted data from a given file.
 If the given file does not exist, the execution is stopped and an error message is given.
 }
 \examples{
-fars_read("datafile.csv")
+fars_read("accident_2013.csv.bz2")
 }

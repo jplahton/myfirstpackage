@@ -22,5 +22,6 @@ but there is no observations, the function gives a message "no accidents
 to plot".
 }
 \examples{
-fars_map_state(1, 2020)
+fars_map_state(1, 2013)
+
 }

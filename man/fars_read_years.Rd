@@ -13,10 +13,11 @@ fars_read_years(years)
 This function returns the data as a tibble object containing columns MONTH and year
 }
 \description{
-This function reads csv-formatted data from files that refer to given years
+This function reads csv-formatted accident data from files that refer to given years
 ie. they contain data from the given years, If one of the files can not be readed, the function
 throws a warning message and returns NULL.
 }
 \examples{
-fars_read_years(c(2019, 2020))
+fars_read_years(c(2013, 2014, 2015))
+
 }
